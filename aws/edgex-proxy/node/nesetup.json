@@ -1,0 +1,63 @@
+{
+	"ccow": {
+		"tenant": {
+			"failure_domain": 0
+		},
+		"network": {
+			"broker_interfaces": "ens4",
+			"server_unix_socket": "/opt/nedge/var/run/sock/ccowd.sock"
+		}
+	},
+	"ccowd": {
+		"network": {
+			"server_interfaces": "ens4",
+			"server_unix_socket": "/opt/nedge/var/run/sock/ccowd.sock"
+		},
+		"transport": [
+			"rtlfs"
+		]
+	},
+	"auditd": {
+		"is_aggregator": 1
+	},
+	"rtlfs": {
+		"devices": [
+			{
+				"name": "store1",
+				"path": "/data/store1",
+				"device": "/data/store1",
+				"check_mountpoint": 0
+			},
+			{
+				"name": "store2",
+				"path": "/data/store2",
+				"device": "/data/store2",
+				"check_mountpoint": 0
+			},
+			{
+				"name": "store3",
+				"path": "/data/store3",
+				"device": "/data/store3",
+				"check_mountpoint": 0
+			},
+			{
+				"name": "store4",
+				"path": "/data/store4",
+				"device": "/data/store4",
+				"check_mountpoint": 0
+			},
+			{
+				"name": "store5",
+				"path": "/data/store5",
+				"device": "/data/store5",
+				"check_mountpoint": 0
+			},
+			{
+				"name": "store6",
+				"path": "/data/store6",
+				"device": "/data/store6",
+				"check_mountpoint": 0
+			}
+		]
+	}
+}
