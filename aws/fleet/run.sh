@@ -14,7 +14,7 @@ export INSTANCE_NUM=$2
 source ec2-env.sh
 
 for i in `seq 1 $INSTANCE_NUM`; do
-	../bin/create-ec2-instance.sh ${EC2_INSTANCE_PREFIX}$i &>/tmp/bladesim-create-ec2-instance.$$.$i.log &
+	../bin/create-ec2-instance.sh ${EC2_INSTANCE_PREFIX}$i &>/tmp/fleet-create-ec2-instance.$$.$i.log &
 done
 echo "Scheduled $INSTANCE_NUM instance(s) creation tasks... waiting"
 wait
@@ -30,7 +30,7 @@ for i in `seq 1 $INSTANCE_NUM`; do
 	fi
 done
 
-CORO_FILE=/tmp/bladesim-corosync.conf.$$
+CORO_FILE=/tmp/fleet-corosync.conf.$$
 cp node/corosync.conf $CORO_FILE
 echo "nodelist {" >> $CORO_FILE
 i=1
@@ -47,10 +47,10 @@ echo "Prepared corosync.conf ..."
 i=1
 for nodeip in $NODE_IPS; do
 	IP=$(../bin/get-IP-nedge.sh ${EC2_INSTANCE_PREFIX}$i)
-	ssh -i $PEM_FILE -t ubuntu@$IP "sudo docker rm -f bladesim"
+	ssh -i $PEM_FILE -t ubuntu@$IP "sudo docker rm -f fleet"
 	scp -i $PEM_FILE $CORO_FILE ubuntu@$IP:/home/ubuntu/node/corosync.conf
 	if test $i = 1; then
-		NESETUP_FILE=/tmp/bladesim-nesetup.json.$$
+		NESETUP_FILE=/tmp/fleet-nesetup.json.$$
 		cp node/nesetup.json $NESETUP_FILE
 		sed 's/aggregator": 0/aggregator": 1/' -i $NESETUP_FILE
 		scp -i $PEM_FILE $NESETUP_FILE ubuntu@$IP:/home/ubuntu/node/nesetup.json
@@ -60,4 +60,4 @@ for nodeip in $NODE_IPS; do
 done
 echo "Cluster started."
 
-#rm -f /tmp/bladesim-*.$$*
+#rm -f /tmp/fleet-*.$$*

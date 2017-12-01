@@ -1,14 +1,12 @@
 #!/bin/bash
 echo
-echo "Provision Edge Cluster to simulate Blade use-case"
+echo "Provision Edge Cluster to simulate NVMe use-case"
 echo
 
 # Prepare docker environment
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-apt-get update
-apt-cache policy docker-ce
-apt-get install -y docker-ce
+yum install docker -y
+service docker start
+sleep 1
 docker pull nexenta/nedge
 
 # Setup network and host parameters

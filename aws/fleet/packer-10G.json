@@ -18,9 +18,9 @@
 			"most_recent": true
 		},
 		"sriov_support": true,
-		"instance_type": "r3.2xlarge",
+		"instance_type": "r3.large",
 		"ssh_username": "ubuntu",
-		"ami_name": "edge-blade-sim {{timestamp}}",
+		"ami_name": "edge-fleet {{timestamp}}",
 		"launch_block_device_mappings": [
 			{
 				"device_name": "/dev/sda1",
@@ -30,13 +30,13 @@
 			},
 			{
 				"device_name": "/dev/xvdb",
-				"volume_size": 160,
+				"volume_size": 32,
 				"virtual_name": "ephemeral0"
 			}
 		],
 		"tags": {
 			"OS_Version": "Ubuntu",
-			"Release": "NexentaEdge Blade Cluster Sim v1.0"
+			"Release": "NexentaEdge Blade Cluster Fleet v1.0"
 		}
 	}],
 	"provisioners": [

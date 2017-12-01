@@ -11,32 +11,26 @@
 		"source_ami_filter": {
 			"filters": {
 				"virtualization-type": "hvm",
-				"name": "ubuntu/images/*ubuntu-xenial-16.04-amd64-server-*",
+				"name": "amzn-ami-hvm-*x86_64-ebs",
 				"root-device-type": "ebs"
 			},
-			"owners": ["099720109477"],
+			"owners": ["137112412989", "591542846629", "801119661308", "102837901569", "013907871322", "206029621532", "286198878708", "443319210888"],
 			"most_recent": true
 		},
-		"sriov_support": true,
-		"instance_type": "r3.2xlarge",
-		"ssh_username": "ubuntu",
-		"ami_name": "edge-blade-sim {{timestamp}}",
+		"ena_support": true,
+		"instance_type": "i3.xlarge",
+		"ssh_username": "ec2-user",
+		"ami_name": "edge-nvme-sim {{timestamp}}",
 		"launch_block_device_mappings": [
 			{
-				"device_name": "/dev/sda1",
-				"volume_size": 64,
-				"volume_type": "standard",
-				"delete_on_termination": true
-			},
-			{
 				"device_name": "/dev/xvdb",
-				"volume_size": 160,
+				"volume_size": 950,
 				"virtual_name": "ephemeral0"
 			}
 		],
 		"tags": {
-			"OS_Version": "Ubuntu",
-			"Release": "NexentaEdge Blade Cluster Sim v1.0"
+			"OS_Version": "Amazon Linux",
+			"Release": "NexentaEdge NVMe Cluster Sim v1.0"
 		}
 	}],
 	"provisioners": [
@@ -52,7 +46,7 @@
 		},
 		{
 			"source": "./node",
-			"destination": "/home/ubuntu/",
+			"destination": "/home/ec2-user/",
 			"type": "file"
 		},
 		{
